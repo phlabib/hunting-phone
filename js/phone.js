@@ -1,4 +1,4 @@
-const loadPhone = async (searchText, isShowAll) =>{
+const loadPhone = async (searchText='13', isShowAll) =>{
     const res = await fetch (`https://openapi.programming-hero.com/api/phones?search=${searchText}`);
     const data = await res.json();
     const phones = data.data;
@@ -23,7 +23,7 @@ const loadPhone = async (searchText, isShowAll) =>{
         showAllContainer.classList.add('hidden');
     }
 
-    console.log('is show all', isShowAll);
+    // console.log('is show all', isShowAll);
         // display only first 12 phones if not show all
         if (!isShowAll){
             phones = phones.slice(0,12);
@@ -41,7 +41,9 @@ const loadPhone = async (searchText, isShowAll) =>{
               <h2 class="card-title">${phones.phone_name}</h2>
               <p>$999</p>
               <div class="card-actions justify-center">
-                <button onclick ="handleShowDetail('${phones.slug}')" class="btn btn-primary">Show Details</button>
+                <button onclick ="handleShowDetail('${phones.slug}');
+                show_details_modal.showModal()"
+                 class="btn btn-primary">Show Details</button>
               </div>
             </div>
             `;
@@ -53,11 +55,27 @@ const loadPhone = async (searchText, isShowAll) =>{
     }
 
         const handleShowDetail = async (id) =>{
-            console.log('click', id);
+            // console.log('click', id);
             // load single phone data
             const res = await fetch(`https://openapi.programming-hero.com/api/phone/${id}`);
             const data = await res.json();
-            console.log(data);
+            const phones = data.data;
+            showPhoneDetails(phones);
+        }
+
+        const showPhoneDetails = (phones) => {
+            console.log(phones);
+            const phoneName = document.getElementById('show-detail-phone-name');
+            phoneName.innerText = phones.name;
+
+            const showDetailContainer = document.getElementById('show-detail-container');
+            showDetailContainer.innerHTML = `
+                <img src="${phones.image}" alt=""/> 
+            `
+            
+
+            // show the modal
+            show_details_modal.showModal();
         }
 
 
@@ -85,4 +103,4 @@ const loadPhone = async (searchText, isShowAll) =>{
     const handleShowAll = () =>{
         handleSearch (true);
     }
-// loadPhone();
+loadPhone();
