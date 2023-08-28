@@ -14,8 +14,21 @@ const loadPhone = async (searchText) =>{
         // clear phone container cards before adding new cards
         phoneContainer.textContent = '';
 
+// display show all buttons if there are more than 12 phones
+    const showAllContainer = document.getElementById('show-all-container')   ;
+    if (phones.length > 12){
+        showAllContainer.classList.remove('hidden');
+    }
+    else{
+        showAllContainer.classList.add('hidden');
+    }
+
+
+        // display only first 12 phones
+        phones = phones.slice(0,12);
+
         phones.forEach(phones => {
-            console.log(phones);
+            // console.log(phones);
             // step 2 : creat a div
             const phoneCard = document.createElement('div')
             phoneCard.classList = `card bg-gray-100 p-4 shadow-xl`;
