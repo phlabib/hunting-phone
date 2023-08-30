@@ -51,6 +51,8 @@ const loadPhone = async (searchText='13', isShowAll) =>{
             // step 4 : appendChild
             phoneContainer.appendChild(phoneCard);
         });
+
+
     // Hide loading spinner
         toggleLoadingSpinner(false);
     }
@@ -70,6 +72,7 @@ const loadPhone = async (searchText='13', isShowAll) =>{
             phoneName.innerText = phones.name;
 
             const showDetailContainer = document.getElementById('show-detail-container');
+
             showDetailContainer.innerHTML = `
             <img src="${phones.image}" alt=""/> 
             <p><span>Brand : </span>${phones.brand}</p>
@@ -78,7 +81,7 @@ const loadPhone = async (searchText='13', isShowAll) =>{
                 <p><span>displaySize : </span>${phones?.mainFeatures?.displaySize}</p>
                 <p><span>Memory : </span>${phones?.mainFeatures?.memory}</p>
                 <p><span>ReleaseDate : </span>${phones?.releaseDate}</p>
-                <p><span>GPS : </span>${phones?.others?.GPS}</p>
+                <p><span>GPS : </span>${phones?.others?.GPS || 'No GPS'}</p>
 
             `
             
@@ -96,6 +99,8 @@ const loadPhone = async (searchText='13', isShowAll) =>{
         console.log(searchText);
         loadPhone(searchText, isShowAll);
     }
+
+
 
     // loading spinner
     const toggleLoadingSpinner = (isLoading) => {
