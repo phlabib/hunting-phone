@@ -34,6 +34,7 @@ const loadPhone = async (searchText='13', isShowAll) =>{
             // step 2 : creat a div
             const phoneCard = document.createElement('div')
             phoneCard.classList = `card bg-gray-100 p-4 shadow-xl`;
+            
             // step 3 : set innerHTML
             phoneCard.innerHTML = `
             <figure><img src="${phones.image}" /></figure>
@@ -70,7 +71,15 @@ const loadPhone = async (searchText='13', isShowAll) =>{
 
             const showDetailContainer = document.getElementById('show-detail-container');
             showDetailContainer.innerHTML = `
-                <img src="${phones.image}" alt=""/> 
+            <img src="${phones.image}" alt=""/> 
+            <p><span>Brand : </span>${phones.brand}</p>
+                <p><span>Storage : </span>${phones?.mainFeatures?.storage}</p>
+                <p><span>Chipset : </span>${phones?.mainFeatures?.chipSet}</p>
+                <p><span>displaySize : </span>${phones?.mainFeatures?.displaySize}</p>
+                <p><span>Memory : </span>${phones?.mainFeatures?.memory}</p>
+                <p><span>ReleaseDate : </span>${phones?.releaseDate}</p>
+                <p><span>GPS : </span>${phones?.others?.GPS}</p>
+
             `
             
 
